@@ -6,10 +6,12 @@ def checkmate(rawboard):
     rawboard รับ stringมา เปลี่ยนเป็น list of string
     """
     if not isinstance(rawboard, str):
+        # rawboard.isStr()
         print("Error")
         return
 
     board = rawboard.splitlines()
+    # board = ["R...", ".K..", "..P.", "...."]
 
     if not is_valid_board(board):
         print("Error")
@@ -65,7 +67,7 @@ def check_diagonal_lines(board, king_pos):
     directions = [(1, 1), (1, -1), (-1, 1), (-1, -1)]
     return check_directions(board, king_pos, directions, "BQ")
 
-
+                              #(1,1)
 def check_directions(board, king_pos, directions, attackers):
     """
     เดินจาก king ไปแต่ละทิศ เจอตัวหมากตัวแรกแล้วหยุด
@@ -82,7 +84,7 @@ def check_directions(board, king_pos, directions, attackers):
             piece = board[x][y]
             if piece in attackers:
                 return True
-            if piece in PIECES: # < อันนี้คือถ้าเจอหมากที่ไม่ใช่ตัวที่เราต้องการหาก็หยุดเลย เพราะไม่ใช่ตัวแรกที่เจอแล้ว เช่น ถ้าเราหาแนวทะแทยง ตัวที่เป็นไปได้คือ Bishop กะ Queen ถ้าเจอตัวอื่นก็แปลว่าไม่ใช่ตัวแรกของทิศนั้นแล้ว
+            if piece in PIECES: #< อันนี้คือถ้าเจอหมากที่ไม่ใช่ตัวที่เราต้องการหาก็หยุดเลย เพราะไม่ใช่ตัวแรกที่เจอแล้ว เช่น ถ้าเราหาแนวทะแทยง ตัวที่เป็นไปได้คือ Bishop กะ Queen ถ้าเจอตัวอื่นก็แปลว่าไม่ใช่ตัวแรกของทิศนั้นแล้ว
                 break
             x += dx
             y += dy
@@ -92,7 +94,7 @@ def check_directions(board, king_pos, directions, attackers):
 
 def check_pawns(board, king_pos):
     """
-    หาpawn (pawn กินแนวทแยงขึ้นข้างบน เลยต้องอยู่ใต้ king)
+    หาpawn นึกภาพ king จะโดน pawn กินได้มีแค่ซ้ายล่างกับขวาล่าง
     """
     size = len(board)
     k_x, k_y = king_pos
